@@ -1,7 +1,6 @@
 name: OpenG2P Odoo Package Dockers build
 
 on:
-  push: {}
   workflow_dispatch:
     inputs:
       packageName:

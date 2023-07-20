@@ -20,6 +20,33 @@ spec:
     - {{ .Values.istio.virtualservice.gateway }}
     {{- end }}
   http:
+  - match:
+    - uri:
+        exact: /
+    redirect:
+      uri: /web
+  - match:
+    - uri:
+        prefix: /selfservice
+    redirect:
+      uri: /selfservice
+      authority:
+        {{- if .Values.selfServiceIngress.istio.virtualservice.host }}
+        {{ .Values.selfServiceIngress.istio.virtualservice.host }}
+        {{- else }}
+        {{ .Values.global.selfServiceHostname }}
+        {{- end }}
+  - match:
+    - uri:
+        prefix: /serviceprovider
+    redirect:
+      uri: /serviceprovider
+      authority:
+        {{- if .Values.serviceProviderIngress.istio.virtualservice.host }}
+        {{ .Values.serviceProviderIngress.istio.virtualservice.host }}
+        {{- else }}
+        {{ .Values.global.serviceProviderHostname }}
+        {{- end }}
   - route:
     - destination:
         host: {{ include "openg2p.fullname" . }}-odoo

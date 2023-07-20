@@ -1,6 +1,7 @@
 global:
   hostname: "openg2p.sandbox.net"
   selfServiceHostname: "selfservice.openg2p.sandbox.net"
+  serviceProviderHostname: "serviceprovider.openg2p.sandbox.net"
   mailname: "openg2p.sandbox.net"
 
 odoo:
@@ -79,6 +80,17 @@ selfServiceIngress:
   enabled: true
   type: istio
   # TODO: Implement type: ingress 
+  istio:
+    enabled: true
+    virtualservice:
+      enabled: true
+      host: ""
+      gateway: "istio-system/all-hosts"
+
+serviceProviderIngress:
+  enabled: true
+  type: istio
+  # TODO: Implement type: ingress
   istio:
     enabled: true
     virtualservice:

@@ -1,20 +1,20 @@
-{{- if .Values.selfServiceIngress.enabled }}
-{{- if eq .Values.selfServiceIngress.type "istio" }}
+{{- if .Values.serviceProviderIngress.enabled }}
+{{- if eq .Values.serviceProviderIngress.type "istio" }}
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: {{ include "openg2p.fullname" . }}-self-service
+  name: {{ include "openg2p.fullname" . }}-service-provider
   labels:
     {{- include "openg2p.labels" . | nindent 4 }}
 spec:
   hosts:
-  {{- if .Values.selfServiceIngress.istio.virtualservice.host }}
-  - {{ .Values.selfServiceIngress.istio.virtualservice.host }}
+  {{- if .Values.serviceProviderIngress.istio.virtualservice.host }}
+  - {{ .Values.serviceProviderIngress.istio.virtualservice.host }}
   {{- else }}
-  - {{ .Values.global.selfServiceHostname }}
+  - {{ .Values.global.serviceProviderHostname }}
   {{- end }}
   gateways:
-    - {{ .Values.selfServiceIngress.istio.virtualservice.gateway }}
+    - {{ .Values.serviceProviderIngress.istio.virtualservice.gateway }}
   http:
   - match:
     - uri:
@@ -30,16 +30,16 @@ spec:
     - uri:
         exact: /web/database/selector
     redirect:
-      uri: /selfservice
+      uri: /serviceprovider
   - match:
     - uri:
-        prefix: /serviceprovider
+        prefix: /selfservice
     redirect:
       authority:
-        {{- if .Values.serviceProviderIngress.istio.virtualservice.host }}
-        {{ .Values.serviceProviderIngress.istio.virtualservice.host }}
+        {{- if .Values.selfServiceIngress.istio.virtualservice.host }}
+        {{ .Values.selfServiceIngress.istio.virtualservice.host }}
         {{- else }}
-        {{ .Values.global.serviceProviderHostname }}
+        {{ .Values.global.selfServiceHostname }}
         {{- end }}
   - route:
     - destination:

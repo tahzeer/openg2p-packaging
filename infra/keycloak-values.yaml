@@ -11,13 +11,7 @@ ingress:
     - ""
     secretName: tls-keycloak-ingress
 
-proxyAddressForwarding: true
-
 replicaCount: 2
-
-# Enable if replicaCount > 1
-serviceDiscovery:
-  enabled: true
 
 resources:
   limits: {}

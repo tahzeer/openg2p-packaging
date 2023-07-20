@@ -2,7 +2,18 @@ name: OpenG2P Odoo Package Dockers build
 
 on:
   push: {}
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      packageName:
+        description: 'Package Name'
+        required: true
+        default: '15.0-develop'
+        type: choice
+        options:
+          - "*"
+          - 15.0-develop
+          - 15.0-develop-pilot001
+          - 15.0-ugc-demo
 
 jobs:
   docker-build:
@@ -23,7 +34,14 @@ jobs:
 
           cd packaging
 
-          for package in packages/*.txt; do
+          packageNameInput=${{ inputs.packageName }}
+
+          if [ ! -f "packages/${packageNameInput}.txt" ]; then
+            echo "Could not find the package specified." 1>&2;
+            exit 1;
+          fi
+
+          for package in packages/${packageNameInput}.txt; do
             export VERSION=$(basename "${package}" ".txt")
             if [[ $VERSION == 15.0-* ]]; then
               export OCA_DEPENDENCY_VERSION="15.0"

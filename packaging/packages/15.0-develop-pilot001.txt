@@ -5,6 +5,7 @@ connector = git://15.0//http://github.com/oca/connector
 rest_framework = git://15.0//http://github.com/oca/rest-framework
 server_env = git://15.0//http://github.com/oca/server-env
 storage = git://15.0//http://github.com/oca/storage
+odoo_formio = git://15.0//http://github.com/novacode-nl/odoo-formio
 #
 odoo_json_field = git://15.0-develop//https://github.com/openg2p/odoo-json-field
 openg2p_documents = git://15.0-develop-pilot001//https://github.com/openg2p/openg2p-documents
@@ -15,4 +16,3 @@ openg2p_theme = git://15.0-develop-pilot001//https://github.com/openg2p/openg2p-
 openg2p_auth = git://15.0-develop-pilot001//https://github.com/openg2p/openg2p-auth
 openg2p_self_service_portal = git://15.0-develop-pilot001//https://github.com/openg2p/openg2p-self-service-portal
 openg2p_notifications = git://15.0-develop-pilot001//https://github.com/openg2p/openg2p-notifications
-odoo_formio = git://15.0//http://github.com/novacode-nl/odoo-formio

@@ -1,3 +1,0 @@
-ml-testing-toolkit-frontend:
-  config:
-    API_BASE_URL: https://ml-ttk.openg2p.sandbox.net

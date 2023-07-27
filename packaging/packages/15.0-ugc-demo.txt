@@ -3,6 +3,7 @@ server_auth = git://15.0//http://github.com/openg2p/server-auth
 queue = git://15.0//http://github.com/oca/queue
 connector = git://15.0//http://github.com/oca/connector
 rest_framework = git://15.0//http://github.com/oca/rest-framework
+odoo_formio = git://15.0//http://github.com/novacode-nl/odoo-formio
 #
 odoo_json_field = git://15.0-ugc-demo//https://github.com/openg2p/odoo-json-field
 openg2p_registry = git://15.0-ugc-demo//https://github.com/openg2p/openg2p-registry
@@ -12,4 +13,3 @@ openg2p_theme = git://15.0-ugc-demo//https://github.com/openg2p/openg2p-theme
 openg2p_auth = git://15.0-ugc-demo//https://github.com/openg2p/openg2p-auth
 openg2p_self_service_portal = git://15.0-ugc-demo//https://github.com/openg2p/openg2p-self-service-portal
 openg2p_notifications = git://15.0-ugc-demo//https://github.com/openg2p/openg2p-notifications
-odoo_formio = git://15.0//http://github.com/novacode-nl/odoo-formio

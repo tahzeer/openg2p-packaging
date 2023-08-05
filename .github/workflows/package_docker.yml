@@ -13,7 +13,7 @@ on:
           - 15.0-develop
           - 15.0-develop-pilot001
           - 15.0-ugc-demo
-          - 15.0-1.1.0-develop
+          - 1.1.0
 
 jobs:
   docker-build:

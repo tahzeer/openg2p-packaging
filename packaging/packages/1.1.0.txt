@@ -15,5 +15,5 @@ openg2p_mts = git://v1.1.0//https://github.com/openg2p/openg2p-mts
 openg2p_theme = git://v1.1.0//https://github.com/openg2p/openg2p-theme
 openg2p_auth = git://v1.1.0//https://github.com/openg2p/openg2p-auth
 openg2p_self_service_portal = git://v1.1.0//https://github.com/openg2p/openg2p-self-service-portal
-openg2p_notifications = git://v1.1.0/https://github.com/openg2p/openg2p-notifications
-openg2p_security = git://v1.1.0/https://github.com/openg2p/openg2p-security
+openg2p_notifications = git://v1.1.0//https://github.com/openg2p/openg2p-notifications
+openg2p_security = git://v1.1.0//https://github.com/openg2p/openg2p-security

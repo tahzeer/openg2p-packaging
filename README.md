@@ -3,7 +3,7 @@ This repo contains scripts for packaging different components or implementations
 Along with instructions to install them.
 
 ## Packaging Instructions
-Refer to [Packaging Instructions](https://docs.openg2p.org/guides/deployment-guide/packaging-openg2p-docker)
+Refer to [OpenG2P Docs](https://docs.openg2p.org/v/1.1).
 
 ## Licenses
 This repository is licensed under [MPL-2.0](LICENSE).

@@ -1,9 +1,9 @@
 # The below modules are OCA dependencies, manually adding them here for now.
-server_auth = git://15.0//http://github.com/openg2p/server-auth
-queue = git://15.0//http://github.com/oca/queue
-connector = git://15.0//http://github.com/oca/connector
-rest_framework = git://15.0//http://github.com/oca/rest-framework
-odoo_formio = git://15.0//http://github.com/novacode-nl/odoo-formio
+server_auth = git://15.0//https://github.com/openg2p/server-auth
+queue = git://15.0//https://github.com/oca/queue
+connector = git://15.0//https://github.com/oca/connector
+rest_framework = git://15.0//https://github.com/oca/rest-framework
+odoo_formio = git://15.0//https://github.com/novacode-nl/odoo-formio
 #
 odoo_json_field = git://15.0-ugc-demo//https://github.com/openg2p/odoo-json-field
 openg2p_registry = git://15.0-ugc-demo//https://github.com/openg2p/openg2p-registry

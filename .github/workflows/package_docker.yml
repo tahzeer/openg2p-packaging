@@ -46,7 +46,7 @@ jobs:
             export VERSION=$(basename "${package}" ".txt")
             if [[ $VERSION == 15.0-* ]]; then
               export OCA_DEPENDENCY_VERSION="15.0"
-              export DOCKER_BASE_TAG="15.0.20220810-debian-11-r9"
+              export DOCKER_BASE_TAG="15.0.20231010-debian-11-r1"
             # elif [[ $VERSION == 16.0-* ]]; then
               # TODO
             fi

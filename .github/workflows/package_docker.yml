@@ -10,7 +10,6 @@ on:
         type: choice
         options:
           - "*"
-          - main
           - 15.0-develop
           - 15.0-develop-pilot001
           - 15.0-ugc-demo

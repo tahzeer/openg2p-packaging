@@ -6,6 +6,7 @@ rest_framework = git://15.0//https://github.com/oca/rest-framework
 server_env = git://15.0//https://github.com/oca/server-env
 storage = git://15.0//https://github.com/oca/storage
 web = git://15.0//https://github.com/oca/web
+helpdesk = git://15.0//https://github.com/oca/helpdesk
 odoo_formio = git://15.0//https://github.com/novacode-nl/odoo-formio
 #
 odoo_json_field = git://15.0-develop//https://github.com/openg2p/odoo-json-field

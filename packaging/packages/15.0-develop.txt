@@ -20,4 +20,4 @@ openg2p_notifications = git://15.0-develop//https://github.com/openg2p/openg2p-n
 openg2p_security = git://15.0-develop//https://github.com/openg2p/openg2p-security
 openspp_registry = git://15.1.1//https://github.com/openspp/openspp-registry
 openspp_program = git://15.1.1//https://github.com/openspp/openspp-program
-openspp_grm = git://15.1.1//https://github.com/openspp/openspp-grievance-redress-mechanism
+openspp_grm = git://15.0//https://github.com/openspp/openspp-grievance-redress-mechanism

@@ -14,6 +14,7 @@ on:
           - 15.0-develop-pilot001
           - 15.0-ugc-demo
           - 15.0-1.1.0
+          - 17.0-develop
           - 1.1.0
 
 jobs:
@@ -44,11 +45,14 @@ jobs:
 
           for package in packages/${packageNameInput}.txt; do
             export VERSION=$(basename "${package}" ".txt")
-            if [[ $VERSION == 15.0-* ]]; then
+            if [[ $VERSION == 15.0* ]]; then
               export OCA_DEPENDENCY_VERSION="15.0"
               export DOCKER_BASE_TAG="15.0.20231010-debian-11-r1"
             # elif [[ $VERSION == 16.0-* ]]; then
               # TODO
+            elif [[ $VERSION == 17.0* ]]; then
+              export OCA_DEPENDENCY_VERSION="17.0"
+              export DOCKER_BASE_TAG="17.0.20240105-debian-11-r0"
             fi
             ./package.sh ${package}
             docker build . \

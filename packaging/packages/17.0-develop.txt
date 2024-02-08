@@ -1,10 +1,10 @@
 # The below modules are OCA dependencies, manually adding them here for now.
-#server_auth = git://17.0//https://github.com/openg2p/server-auth
+server_auth = git://17.0//https://github.com/openg2p/server-auth
 queue = git://17.0//https://github.com/oca/queue
 connector = git://17.0//https://github.com/oca/connector
-#rest_framework = git://17.0//https://github.com/oca/rest-framework
+rest_framework = git://17.0//https://github.com/openg2p/rest-framework
 server_env = git://17.0//https://github.com/oca/server-env
-storage = git://17.0//https://github.com/oca/storage
+storage = git://17.0//https://github.com/openg2p/storage
 web = git://17.0//https://github.com/oca/web
 helpdesk = git://17.0//https://github.com/oca/helpdesk
 #odoo_formio = git://17.0//https://github.com/novacode-nl/odoo-formio

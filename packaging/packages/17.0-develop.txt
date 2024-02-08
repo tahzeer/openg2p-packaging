@@ -4,6 +4,7 @@ queue = git://17.0//https://github.com/oca/queue
 connector = git://17.0//https://github.com/oca/connector
 rest_framework = git://17.0//https://github.com/openg2p/rest-framework
 server_env = git://17.0//https://github.com/oca/server-env
+server_tools = git://17.0//https://github.com/openg2p/server-tools
 storage = git://17.0//https://github.com/openg2p/storage
 web = git://17.0//https://github.com/oca/web
 web-api= git://17.0//https://github.com/oca/web-api

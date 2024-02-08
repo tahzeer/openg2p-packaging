@@ -7,7 +7,7 @@ server_env = git://17.0//https://github.com/oca/server-env
 server_tools = git://17.0//https://github.com/openg2p/server-tools
 storage = git://17.0//https://github.com/openg2p/storage
 web = git://17.0//https://github.com/oca/web
-web-api= git://17.0//https://github.com/oca/web-api
+web_api= git://17.0//https://github.com/oca/web-api
 helpdesk = git://17.0//https://github.com/oca/helpdesk
 #odoo_formio = git://17.0//https://github.com/novacode-nl/odoo-formio
 #

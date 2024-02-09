@@ -16,6 +16,7 @@ on:
           - 15.0-1.1.0
           - 17.0-develop
           - 1.1.0
+          - 17.0-develop-social-registry
 
 jobs:
   docker-build:
@@ -32,8 +33,6 @@ jobs:
 
       - name: Docker build & push
         run: |
-          export IMAGE_ID=$NAMESPACE/$SERVICE_NAME
-
           cd packaging
 
           packageNameInput=${{ inputs.packageName }}
@@ -44,6 +43,10 @@ jobs:
           fi
 
           for package in packages/${packageNameInput}.txt; do
+            export IMAGE_ID=$NAMESPACE/$SERVICE_NAME
+            if [[ $packageNameInput = *social-registry* ]]; then
+              export IMAGE_ID="$NAMESPACE/openg2p-social-registry-odoo-package"
+            fi
             export VERSION=$(basename "${package}" ".txt")
             if [[ $VERSION == 15.0* ]]; then
               export OCA_DEPENDENCY_VERSION="15.0"

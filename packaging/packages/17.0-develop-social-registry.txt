@@ -8,5 +8,6 @@ server_tools = git://17.0//https://github.com/openg2p/server-tools
 web = git://17.0//https://github.com/oca/web
 web_api= git://17.0//https://github.com/oca/web-api
 #
+openg2p_auth = git://17.0-develop//https://github.com/openg2p/openg2p-auth
 openg2p_registry = git://17.0-develop//https://github.com/openg2p/openg2p-registry
 openg2p_social_registry = git://17.0-develop//https://github.com/openg2p/openg2p-social-registry

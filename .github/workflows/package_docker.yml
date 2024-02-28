@@ -45,10 +45,8 @@ jobs:
 
           for package in packages/${packageNameInput}.txt; do
             export IMAGE_ID=$NAMESPACE/$SERVICE_NAME
-            if [[ $packageNameInput = "17.0-develop-social-registry" ]]; then
+            if [[ $packageNameInput = 17.0-develop-social-registry* ]]; then
               export IMAGE_ID="$NAMESPACE/openg2p-social-registry-odoo-package"
-            if [[ $packageNameInput = "17.0-develop-pbms-with-social-registry" ]]; then
-              export IMAGE_ID="$NAMESPACE/openg2p-pbms-with-social-registry-odoo-package"
             fi
             export VERSION=$(basename "${package}" ".txt")
             if [[ $VERSION == 15.0* ]]; then

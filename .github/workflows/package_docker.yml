@@ -17,6 +17,7 @@ on:
           - 17.0-develop
           - 1.1.0
           - 17.0-develop-social-registry
+          - 17.0-develop-pbms-with-social-registry
 
 jobs:
   docker-build:
@@ -44,7 +45,7 @@ jobs:
 
           for package in packages/${packageNameInput}.txt; do
             export IMAGE_ID=$NAMESPACE/$SERVICE_NAME
-            if [[ $packageNameInput = *social-registry* ]]; then
+            if [[ $packageNameInput = 17.0-develop-social-registry* ]]; then
               export IMAGE_ID="$NAMESPACE/openg2p-social-registry-odoo-package"
             fi
             export VERSION=$(basename "${package}" ".txt")

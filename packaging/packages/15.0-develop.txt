@@ -2,7 +2,7 @@
 server_auth = git://15.0//https://github.com/openg2p/server-auth
 queue = git://15.0//https://github.com/oca/queue
 connector = git://15.0//https://github.com/oca/connector
-rest_framework = git://15.0//https://github.com/oca/rest-framework
+rest_framework = git://15.0//https://github.com/openg2p/rest-framework
 server_env = git://15.0//https://github.com/oca/server-env
 storage = git://15.0//https://github.com/oca/storage
 web = git://15.0//https://github.com/oca/web

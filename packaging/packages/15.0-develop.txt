@@ -22,3 +22,4 @@ openg2p_security = git://15.0-develop//https://github.com/openg2p/openg2p-securi
 openg2p_importers = git://15.0-develop//https://github.com/openg2p/openg2p-importers
 openspp_registry = git://15.1.1-mono-repo//https://github.com/openspp/openspp-registry
 openspp_grm = git://15.0//https://github.com/openspp/openspp-grievance-redress-mechanism
+openg2p_formio = git://15.0-develop//https://github.com/openg2p/openg2p-formio

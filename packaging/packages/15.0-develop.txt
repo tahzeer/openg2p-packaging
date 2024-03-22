@@ -1,5 +1,4 @@
 # The below modules are OCA dependencies, manually adding them here for now.
-server_auth = git://15.0//https://github.com/openg2p/server-auth
 queue = git://15.0//https://github.com/oca/queue
 connector = git://15.0//https://github.com/oca/connector
 rest_framework = git://15.0//https://github.com/openg2p/rest-framework
@@ -19,6 +18,7 @@ openg2p_auth = git://15.0-develop//https://github.com/openg2p/openg2p-auth
 openg2p_self_service_portal = git://15.0-develop//https://github.com/openg2p/openg2p-self-service-portal
 openg2p_notifications = git://15.0-develop//https://github.com/openg2p/openg2p-notifications
 openg2p_security = git://15.0-develop//https://github.com/openg2p/openg2p-security
+openg2p_vci = git://15.0-develop//https://github.com/openg2p/openg2p-vci
 openg2p_importers = git://15.0-develop//https://github.com/openg2p/openg2p-importers
 openspp_registry = git://15.1.1-mono-repo//https://github.com/openspp/openspp-registry
 openspp_grm = git://15.0//https://github.com/openspp/openspp-grievance-redress-mechanism

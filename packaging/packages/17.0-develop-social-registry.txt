@@ -18,3 +18,4 @@ openg2p_social_registry = git://17.0-develop//https://github.com/openg2p/openg2p
 openg2p_importers = git://17.0-develop//https://github.com/openg2p/openg2p-importers
 openg2p_security = git://17.0-develop//https://github.com/openg2p/openg2p-security
 openg2p_vci = git://17.0-develop//https://github.com/openg2p/openg2p-vci
+openg2p_service_provider_portal = git://17.0-develop//https://github.com/openg2p/openg2p-service-provider-portal

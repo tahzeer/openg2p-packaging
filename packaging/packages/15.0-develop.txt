@@ -1,6 +1,4 @@
 # The below modules are OCA dependencies, manually adding them here for now.
-# TODO: Remove server_auth
-server_auth = git://15.0//https://github.com/openg2p/server-auth
 queue = git://15.0//https://github.com/oca/queue
 connector = git://15.0//https://github.com/oca/connector
 rest_framework = git://15.0//https://github.com/openg2p/rest-framework
@@ -11,6 +9,7 @@ helpdesk = git://15.0//https://github.com/oca/helpdesk
 odoo_formio = git://15.0//https://github.com/novacode-nl/odoo-formio
 #
 odoo_json_field = git://15.0-develop//https://github.com/openg2p/odoo-json-field
+openg2p_odoo_commons = git://15.0-develop//https://github.com/openg2p/openg2p-odoo-commons
 openg2p_documents = git://15.0-develop//https://github.com/openg2p/openg2p-documents
 openg2p_registry = git://15.0-develop//https://github.com/openg2p/openg2p-registry
 openg2p_program = git://15.0-develop//https://github.com/openg2p/openg2p-program

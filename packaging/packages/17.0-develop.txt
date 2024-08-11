@@ -10,6 +10,9 @@ web_api= git://17.0//https://github.com/oca/web-api
 helpdesk = git://17.0//https://github.com/oca/helpdesk
 odoo_formio = git://17.0//https://github.com/novacode-nl/odoo-formio
 #
+# The below modules are External Addons
+smile_odoo_addons= git://17.0//https://github.com/OpenG2P/smile_odoo_addons
+#
 openg2p_odoo_commons = git://17.0-develop//https://github.com/openg2p/openg2p-odoo-commons
 openg2p_documents = git://17.0-develop//https://github.com/openg2p/openg2p-documents
 openg2p_registry = git://17.0-develop//https://github.com/openg2p/openg2p-registry

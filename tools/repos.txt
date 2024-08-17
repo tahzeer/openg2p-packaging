@@ -1,0 +1,10 @@
+openg2p-odoo-commons
+openg2p-auth
+openg2p-documents
+openg2p-registry
+openg2p-social-registry
+openg2p-importers
+openg2p-security
+openg2p-vci
+openg2p-service-provider-portal
+openg2p-ati

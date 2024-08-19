@@ -21,7 +21,7 @@ Refer to `add_commit.sh`
 
 ## Tag a specific version
 To tag a version, 
-* Decide on a tag name like `v1.2.0`
+* Decide on a tag name like `v1.2.0`. When it comes to tagging we DO NOT follow the Odoo convention, but instead just create a tag like `v1.2.0`.
 * Create a branch with name without prefix like `1.2.0` on all the repos
 * Update the version of all the Odoo modules to reflect the final Odoo module version, like `17.0.1.2.0`. 
 * Tag all the repos with `v1.2.0`. You may do this on command line or using Releases feature of Github. Although, these version may not be releases, so it may be miscommunication. Hence, suggested to this on command line. If you use Github's releases it appears as a proper release with name etc under Releases, however, if you just tag on command line it appears just as a 'tag' under Releases.

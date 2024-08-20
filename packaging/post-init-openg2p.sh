@@ -2,12 +2,45 @@
 
 #ODOO_CONF_FILE=
 #ODOO_ADDONS_DIR=
+#ODOO_VOLUME_DIR=
 #ODOO_DATABASE_NAME=
 EXTRA_ADDONS_PATH="/opt/bitnami/odoo/extraaddons"
 
 for dir in $EXTRA_ADDONS_PATH/*/; do
   ODOO_ADDONS_DIR="$ODOO_ADDONS_DIR,${dir%/}"
 done
+
+if [ -n "$EXTRA_ADDONS_URLS_TO_PULL" ]; then
+  EXTRA_ADDONS_PULLED_DIR=$ODOO_VOLUME_DIR/extraaddons
+  mkdir -p $EXTRA_ADDONS_PULLED_DIR
+  IFS=",";
+  for addon_pull_url in $EXTRA_ADDONS_URLS_TO_PULL; do
+    if [[ $addon_pull_url == "git://"* ]]; then
+      package_value=${addon_pull_url#"git://"}
+      branch_name=${package_value%%"//"*}
+      git_address=${package_value#*"//"}
+      repo_name=$(basename $git_address)
+      repo_name=${repo_name%.*}
+
+      if ! [ -d $EXTRA_ADDONS_PULLED_DIR/$repo_name ]; then
+        git clone --depth 1 -b ${branch_name} ${git_address} $EXTRA_ADDONS_PULLED_DIR/$repo_name
+      fi
+      if [ -f $EXTRA_ADDONS_PULLED_DIR/$repo_name/requirements.txt ]; then
+        source $ODOO_BASE_DIR/venv/bin/activate;
+        pip install -f $EXTRA_ADDONS_PULLED_DIR/$repo_name/requirements.txt
+        deactivate
+      fi
+    # elif [[ ${PACKAGES_VALUES[i]} == "file://"* ]]; then
+    # TBD: Define other prefixes.
+    fi
+  done
+  unset IFS
+  for addon_dir in $EXTRA_ADDONS_PULLED_DIR/*/*/; do
+    if ! [ -e $ODOO_VOLUME_DIR/addons/$(basename $addon_dir) ]; then
+      ln -s ${addon_dir%/} $ODOO_VOLUME_DIR/addons/$(basename $addon_dir)
+    fi
+  done
+fi
 
 TO_REPLACE=$(grep -i addons_path $ODOO_CONF_FILE)
 sed -i "s#$TO_REPLACE#addons_path = $ODOO_ADDONS_DIR#g" $ODOO_CONF_FILE

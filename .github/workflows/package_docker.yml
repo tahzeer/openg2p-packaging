@@ -6,25 +6,28 @@ on:
       packageName:
         description: 'Package Name'
         required: true
-        default: '15.0-develop'
+        default: 'pbms/17.0-develop'
         type: choice
         options:
-          - "*"
-          - 15.0-develop
-          - 15.0-develop-pilot001
-          - 15.0-ugc-demo
-          - 15.0-1.1.0
-          - 17.0-develop
-          - 1.1.0
-          - 17.0-develop-social-registry
-          - 17.0-develop-pbms-with-social-registry
+          - pbms/*
+          - pbms/15.0-develop
+          - pbms/15.0-develop-pilot001
+          - pbms/15.0-ugc-demo
+          - pbms/15.0-1.1.0
+          - pbms/1.1.0
+          - pbms/17.0-develop-with-social-registry
+          - pbms/17.0-develop
+          - social-registry/*
+          - social-registry/17.0-develop
+          - social-registry/v1.2.0
 
 jobs:
   docker-build:
     runs-on: ubuntu-latest
     env:
       NAMESPACE: ${{ secrets.docker_hub_organisation }}
-      SERVICE_NAME: openg2p-odoo-package
+      PBMS_DOCKER_IMAGE_NAME: openg2p-odoo-package
+      SOCIAL_REGISTRY_DOCKER_IMAGE_NAME: openg2p-social-registry-odoo-package
     steps:
       - uses: actions/checkout@v2
 
@@ -44,24 +47,23 @@ jobs:
           fi
 
           for package in packages/${packageNameInput}.txt; do
-            export IMAGE_ID=$NAMESPACE/$SERVICE_NAME
-            if [[ $packageNameInput = 17.0-develop-social-registry* ]]; then
-              export IMAGE_ID="$NAMESPACE/openg2p-social-registry-odoo-package"
+            if [[ $packageNameInput == pbms* ]]; then
+              export IMAGE_ID=$NAMESPACE/$PBMS_DOCKER_IMAGE_NAME
+            elif [[ $packageNameInput == social-registry* ]]; then
+              export IMAGE_ID=$NAMESPACE/$SOCIAL_REGISTRY_DOCKER_IMAGE_NAME
             fi
-            export VERSION=$(basename "${package}" ".txt")
-            if [[ $VERSION == 15.0* ]]; then
-              export OCA_DEPENDENCY_VERSION="15.0"
-              export DOCKER_BASE_TAG="15.0.20231010-debian-11-r1"
-            # elif [[ $VERSION == 16.0-* ]]; then
-              # TODO
-            elif [[ $VERSION == 17.0* ]]; then
-              export OCA_DEPENDENCY_VERSION="17.0"
-              export DOCKER_BASE_TAG="17.0.20240505-debian-12-r0"
-            fi
+
+            export ODOO_BASE_VERSION=$(head -n 1 $package)
+            export ODOO_BASE_VERSION=${ODOO_BASE_VERSION#"#!"}
+
+            export OCA_DEPENDENCY_VERSION=$(echo $ODOO_BASE_VERSION | awk -F'.' '{print $1 "." $2}')
+
+            export DOCKER_TAG=$(basename "${package}" ".txt")
+
             ./package.sh ${package}
             docker build . \
-              --build-arg BASE_VERSION=${DOCKER_BASE_TAG} \
+              --build-arg BASE_VERSION=${ODOO_BASE_VERSION} \
               --file Dockerfile \
-              --tag $IMAGE_ID:$VERSION
-            docker push $IMAGE_ID:$VERSION
+              --tag $IMAGE_ID:$DOCKER_TAG
+            docker push $IMAGE_ID:$DOCKER_TAG
           done

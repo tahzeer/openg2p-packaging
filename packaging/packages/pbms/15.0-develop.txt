@@ -1,3 +1,4 @@
+#!15.0.20231010-debian-11-r1
 # The below modules are OCA dependencies, manually adding them here for now.
 queue = git://15.0//https://github.com/oca/queue
 connector = git://15.0//https://github.com/oca/connector

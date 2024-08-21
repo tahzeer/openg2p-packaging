@@ -47,11 +47,11 @@ jobs:
           fi
 
           for package in packages/${packageNameInput}.txt; do
-            export ODOO_BASE_VERSION=$(head -n 1 $package)
+            export ODOO_BASE_VERSION=$(sed -n '1p' $package)
             export ODOO_BASE_VERSION=${ODOO_BASE_VERSION#"#!"}
             export OCA_DEPENDENCY_VERSION=$(echo $ODOO_BASE_VERSION | awk -F'.' '{print $1 "." $2}')
 
-            export IMAGE_ID=$(head -n 2 $package)
+            export IMAGE_ID=$(sed -n '2p' $package)
 
             if [[ $IMAGE_ID == "#!"* ]]; then
               export IMAGE_ID=${IMAGE_ID#"#!"}

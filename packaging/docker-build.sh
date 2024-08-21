@@ -7,6 +7,7 @@ EXTRA_ADDONS_DIR="$ODOO_BASE_DIR/extraaddons"
 
 apt-get update
 apt-get install -y build-essential autoconf libtool
+apt-get install -y libjpeg8-dev zlib1g-dev
 source $ODOO_BASE_DIR/venv/bin/activate
 for dir in $EXTRA_ADDONS_DIR/*/; do
     if [[ -f ${dir}requirements.txt ]]; then

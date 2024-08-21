@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NAMESPACE: ${{ secrets.docker_hub_organisation }}
-      PBMS_DOCKER_IMAGE_NAME: openg2p-odoo-package
+      PBMS_DOCKER_IMAGE_NAME: openg2p-pbms-odoo-package
       SOCIAL_REGISTRY_DOCKER_IMAGE_NAME: openg2p-social-registry-odoo-package
     steps:
       - uses: actions/checkout@v2
@@ -47,23 +47,27 @@ jobs:
           fi
 
           for package in packages/${packageNameInput}.txt; do
-            if [[ $packageNameInput == pbms* ]]; then
-              export IMAGE_ID=$NAMESPACE/$PBMS_DOCKER_IMAGE_NAME
-            elif [[ $packageNameInput == social-registry* ]]; then
-              export IMAGE_ID=$NAMESPACE/$SOCIAL_REGISTRY_DOCKER_IMAGE_NAME
-            fi
-
             export ODOO_BASE_VERSION=$(head -n 1 $package)
             export ODOO_BASE_VERSION=${ODOO_BASE_VERSION#"#!"}
-
             export OCA_DEPENDENCY_VERSION=$(echo $ODOO_BASE_VERSION | awk -F'.' '{print $1 "." $2}')
 
-            export DOCKER_TAG=$(basename "${package}" ".txt")
+            export IMAGE_ID=$(head -n 2 $package)
+
+            if [[ $IMAGE_ID == "#!"* ]]; then
+              export IMAGE_ID=${IMAGE_ID#"#!"}
+            else
+              export DOCKER_TAG=$(basename "${package}" ".txt")
+              if [[ $packageNameInput == pbms* ]]; then
+                export IMAGE_ID=$NAMESPACE/$PBMS_DOCKER_IMAGE_NAME:$DOCKER_TAG
+              elif [[ $packageNameInput == social-registry* ]]; then
+                export IMAGE_ID=$NAMESPACE/$SOCIAL_REGISTRY_DOCKER_IMAGE_NAME:$DOCKER_TAG
+              fi
+            fi
 
             ./package.sh ${package}
             docker build . \
               --build-arg BASE_VERSION=${ODOO_BASE_VERSION} \
               --file Dockerfile \
-              --tag $IMAGE_ID:$DOCKER_TAG
-            docker push $IMAGE_ID:$DOCKER_TAG
+              --tag $IMAGE_ID
+            docker push $IMAGE_ID
           done

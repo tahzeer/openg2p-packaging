@@ -19,7 +19,7 @@ on:
           - pbms/17.0-develop
           - social-registry/*
           - social-registry/17.0-develop
-          - social-registry/v1.2.0
+          - social-registry/1.2.0
 
 jobs:
   docker-build:

@@ -1,5 +1,5 @@
-#!15.0.20231010-debian-11-r1
 #!openg2p/openg2p-pbms-odoo-package:1.1.0
+#!15.0.20231010-debian-11-r1
 # The below modules are OCA dependencies, manually adding them here for now.
 server_auth = git://15.0//http://github.com/openg2p/server-auth
 queue = git://15.0//http://github.com/oca/queue

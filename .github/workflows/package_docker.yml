@@ -20,6 +20,7 @@ on:
           - social-registry/*
           - social-registry/17.0-develop
           - social-registry/1.2.0
+          - social-registry/1.2.1
 
 jobs:
   docker-build:
@@ -47,11 +48,7 @@ jobs:
           fi
 
           for package in packages/${packageNameInput}.txt; do
-            export ODOO_BASE_VERSION=$(sed -n '1p' $package)
-            export ODOO_BASE_VERSION=${ODOO_BASE_VERSION#"#!"}
-            export OCA_DEPENDENCY_VERSION=$(echo $ODOO_BASE_VERSION | awk -F'.' '{print $1 "." $2}')
-
-            export IMAGE_ID=$(sed -n '2p' $package)
+            export IMAGE_ID=$(sed -n '1p' $package)
 
             if [[ $IMAGE_ID == "#!"* ]]; then
               export IMAGE_ID=${IMAGE_ID#"#!"}
@@ -63,6 +60,10 @@ jobs:
                 export IMAGE_ID=$NAMESPACE/$SOCIAL_REGISTRY_DOCKER_IMAGE_NAME:$DOCKER_TAG
               fi
             fi
+
+            export ODOO_BASE_VERSION=$(sed -n '2p' $package)
+            export ODOO_BASE_VERSION=${ODOO_BASE_VERSION#"#!"}
+            export OCA_DEPENDENCY_VERSION=$(echo $ODOO_BASE_VERSION | awk -F'.' '{print $1 "." $2}')
 
             ./package.sh ${package}
             docker build . \

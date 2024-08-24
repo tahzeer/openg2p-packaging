@@ -83,7 +83,7 @@ for i in ${!PACKAGES_VARS[@]}; do
     package_value=${package_value#"$GIT_PREFIX"}
     branch_name=${package_value%%"//"*}
     git_address=${package_value#*"//"}
-    git clone -b ${branch_name} ${git_address} $TMPDIR/${PACKAGES_VARS[i]}
+    git clone --depth 1 -b ${branch_name} ${git_address} $TMPDIR/${PACKAGES_VARS[i]}
   elif [[ ${PACKAGES_VALUES[i]} == "$FILE_PREFIX"* ]]; then
     package_value=${package_value#"$FILE_PREFIX"}
     cp -r $package_value $TMPDIR/${PACKAGES_VARS[i]}

@@ -35,7 +35,7 @@ jobs:
       run: |
         if [[ ${{ inputs.previous-tag }} -eq "None" ]]; then
           echo "SKIP=TRUE" >> $GITHUB_ENV
-
+        fi
     - name: Check if the branch has moved at all
       run: |
         if [[ -z $(git diff ${{ inputs.previous-tag }} ]]; then

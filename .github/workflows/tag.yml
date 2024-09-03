@@ -48,4 +48,4 @@ jobs:
     - name: Create tag and push
       run: |
         git tag ${{ inputs.new-tag }} 
-        git push 
+        git push origin ${{ inputs.new-tag }} 

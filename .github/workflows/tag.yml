@@ -38,7 +38,7 @@ jobs:
         fi
     - name: Check if the branch has moved at all
       run: |
-        if [[ -z $(git diff ${{ inputs.previous-tag }} ]]; then
+        if [[ -z $(git diff ${{ inputs.previous-tag }}) ]]; then
           echo "No changes on this branch. Tag not created"
         exit 1
         fi

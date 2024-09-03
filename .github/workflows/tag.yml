@@ -1,0 +1,26 @@
+name: Tag a repo with few checks
+on:
+  workflow_dispatch:
+    inputs:
+      tagname:
+        required: true
+        type: string
+      
+jobs:
+  tag-repo:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+    - name: Checkout branch for publishing
+      uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.OPENG2P_BOT_GITHUB_PAT }}
+    - name: Check tag convention 
+      run: |
+        pattern="^v[0-9].[0-9].[0-9]$"
+        if ! [[ ${{ inputs.tagname }} =~ $pattern ]]; then
+          echo "Tag convention not followed" 
+          exit 1
+        fi

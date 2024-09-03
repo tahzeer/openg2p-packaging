@@ -45,6 +45,7 @@ jobs:
           latest_tag=$(git describe --tags)
           check_branch_and_exit "$latest_tag"
         elif [[ "${{ inputs.previous-tag }}" == "None" ]]; then
+          echo ""
         else
           check_branch_and_exit "${{ inputs.previous-tag }}"
         fi

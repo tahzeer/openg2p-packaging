@@ -45,7 +45,6 @@ jobs:
           latest_tag=$(git describe --tags)
           check_branch_and_exit "$latest_tag"
         elif [[ "${{ inputs.previous-tag }}" == "None" ]]; then
-        else
           check_branch_and_exit "${{ inputs.previous-tag }}"
         fi
     - name: Create tag and push

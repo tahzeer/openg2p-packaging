@@ -1,6 +1,6 @@
 name: Tag a repo with few checks
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       new-tag:
         description: Tag in "vN.N.N" format
@@ -10,12 +10,13 @@ on:
         description: Previous tag. "None" if no previous tag
         required: true
         type: string
-      
+        default: latest
+    secrets:
+      OPENG2P_BOT_GITHUB_PAT:
+        required: true
 jobs:
   tag-repo:
     runs-on: ubuntu-latest
-    env:
-      SKIP: 'FALSE'
     defaults:
       run:
         shell: bash
@@ -25,27 +26,29 @@ jobs:
       with:
         token: ${{ secrets.OPENG2P_BOT_GITHUB_PAT }}
         fetch-depth: 0
-    - name: Check tag convention 
+    - name: Check tag convention
       run: |
         pattern="^v[0-9].[0-9].[0-9]$"
         if ! [[ ${{ inputs.new-tag }} =~ $pattern ]]; then
-          echo "Tag convention not followed" 
+          echo "Tag convention not followed"
           exit 1
-        fi
-    - name: If tag is None
-      run: |
-        if [[ ${{ inputs.previous-tag }} -eq "None" ]]; then
-          echo "SKIP=TRUE" >> $GITHUB_ENV
         fi
     - name: Check if the branch has moved at all
       run: |
-        if [[ -z $(git diff ${{ inputs.previous-tag }}) ]]; then
-          echo "No changes on this branch. Tag not created"
-        exit 1
+        check_branch_and_exit (){
+          if [[ -z $(git diff $1) ]]; then
+            echo "::error::No changes on this branch. Tag not created"
+            exit 1
+          fi
+        }
+        if [[ "${{ inputs.previous-tag }}" == "latest" ]]; then
+          latest_tag=$(git describe --tags)
+          check_branch_and_exit "$latest_tag"
+        elif [[ "${{ inputs.previous-tag }}" == "None" ]]; then
+        else
+          check_branch_and_exit "${{ inputs.previous-tag }}"
         fi
-      if: env.SKIP != 'TRUE'
-
     - name: Create tag and push
       run: |
-        git tag ${{ inputs.new-tag }} 
-        git push origin ${{ inputs.new-tag }} 
+        git tag ${{ inputs.new-tag }}
+        git push origin ${{ inputs.new-tag }}

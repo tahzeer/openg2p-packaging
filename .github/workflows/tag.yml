@@ -45,6 +45,7 @@ jobs:
         fi
       if: env.SKIP != 'TRUE'
 
-    - name: Create tag
+    - name: Create tag and push
       run: |
         git tag ${{ inputs.new-tag }} 
+        git push 

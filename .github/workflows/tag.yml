@@ -2,13 +2,19 @@ name: Tag a repo with few checks
 on:
   workflow_dispatch:
     inputs:
-      tagname:
+      new-tag:
+        required: true
+        type: string
+      previous-tag:
+        description: Mention None if no previous tag
         required: true
         type: string
       
 jobs:
   tag-repo:
     runs-on: ubuntu-latest
+    env:
+      SKIP: 'FALSE'
     defaults:
       run:
         shell: bash
@@ -24,3 +30,19 @@ jobs:
           echo "Tag convention not followed" 
           exit 1
         fi
+    - name: If tag is None
+      run: |
+        if [[ ${{ inputs.previous-tag }} -eq "None" ]]; then
+          echo "SKIP=TRUE" >> $GITHUB_ENV
+
+    - name: Check if the branch has moved at all
+      run: |
+        if [[ -z $(git diff ${{ inputs.previous-tag }} ]]; then
+          echo "No changes on this branch. Tag not created"
+        exit 1
+        fi
+      if: env.SKIP != 'TRUE'
+
+    - name: Create tag
+      run: |
+        git tag ${{ inputs.new-tag }} 

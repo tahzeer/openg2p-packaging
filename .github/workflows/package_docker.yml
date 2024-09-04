@@ -23,6 +23,7 @@ on:
           - social-registry/1.2.1
           - social-registry/1.2.2
           - social-registry/1.2
+          - social-registry/1.2.3
 
 jobs:
   docker-build:

@@ -2,7 +2,7 @@
 
 export_from_packages(){
   if [ -f $1 ]; then
-    IFS=$'\n' packages_file_content=($(cat $1))
+    IFS=$'\n' packages_file_content=($(envsubst < $1))
     prefix="$2"
     for package in ${packages_file_content[@]}; do
       package=${package//[[:space:]]/}
@@ -62,10 +62,6 @@ else
 fi
 
 PREFIX=$(get_final_prefix $PREFIX $PACKAGE_TXT_PATH)
-
-if [ -z $OCA_DEPENDENCY_VERSION ]; then
-  export OCA_DEPENDENCY_VERSION="15.0"
-fi
 
 export_from_packages $PACKAGE_TXT_PATH $PREFIX
 if [ -f .env ]; then

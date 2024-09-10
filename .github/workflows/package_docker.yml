@@ -23,9 +23,12 @@ on:
           - social-registry/1.2.1
           - social-registry/1.2.2
           - social-registry/1.2.3
+          - social-registry/1.3.0
           - social-registry/1.2
           - social-registry/1.3
-          - social-registry/1.3.0
+          - ati-social-registry/1.3.0
+          - ati-social-registry/1.3
+          - ati-social-registry/17.0-develop
 
 jobs:
   docker-build:
@@ -34,6 +37,7 @@ jobs:
       NAMESPACE: ${{ secrets.docker_hub_organisation }}
       PBMS_DOCKER_IMAGE_NAME: openg2p-pbms-odoo-package
       SOCIAL_REGISTRY_DOCKER_IMAGE_NAME: openg2p-social-registry-odoo-package
+      OPENG2P_BOT_GITHUB_PAT: ${{ secrets.OPENG2P_BOT_GITHUB_PAT }}
     steps:
       - uses: actions/checkout@v2
 
@@ -68,7 +72,6 @@ jobs:
 
             export ODOO_BASE_VERSION=$(sed -n '2p' $package)
             export ODOO_BASE_VERSION=${ODOO_BASE_VERSION#"#!"}
-            export OCA_DEPENDENCY_VERSION=$(echo $ODOO_BASE_VERSION | awk -F'.' '{print $1 "." $2}')
 
             ./package.sh ${package}
             docker build . \

@@ -24,9 +24,11 @@ on:
           - social-registry/1.2.2
           - social-registry/1.2.3
           - social-registry/1.3.0
+          - social-registry/1.3.1
           - social-registry/1.2
           - social-registry/1.3
           - ati-social-registry/1.3.0
+          - ati-social-registry/1.3.1
           - ati-social-registry/1.3
           - ati-social-registry/17.0-develop
 

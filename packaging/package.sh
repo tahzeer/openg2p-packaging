@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 export_from_packages(){
   if [ -f $1 ]; then
     IFS=$'\n' packages_file_content=($(envsubst < $1))
@@ -85,4 +87,3 @@ for i in ${!PACKAGES_VARS[@]}; do
     cp -r $package_value $TMPDIR/${PACKAGES_VARS[i]}
   fi
 done
-

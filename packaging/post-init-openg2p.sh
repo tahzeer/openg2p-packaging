@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 #ODOO_CONF_FILE=
 #ODOO_ADDONS_DIR=
 #ODOO_VOLUME_DIR=

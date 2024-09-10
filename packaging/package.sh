@@ -90,15 +90,3 @@ for i in ${!PACKAGES_VARS[@]}; do
   fi
 done
 
-for dir in $TMPDIR/*/; do
-  if [[ -f "${dir}oca_dependencies.txt" ]]; then
-    IFS=$'\n' deps=($(cat ${dir}oca_dependencies.txt))
-    for i in ${!deps[@]}; do
-      if [[ "${deps[i]//[[:space:]]/}" != "#"* ]]; then
-        if ! [[ -d "$TMPDIR/${deps[i]}" ]];then
-          git clone -b $OCA_DEPENDENCY_VERSION https://github.com/OCA/${deps[i]} $TMPDIR/${deps[i]}
-        fi
-      fi
-    done
-  fi
-done

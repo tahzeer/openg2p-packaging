@@ -2,6 +2,8 @@
 # Donot run this on local,
 # this is supposed to be run inside docker
 
+set -e
+
 ODOO_BASE_DIR="/opt/bitnami/odoo"
 EXTRA_ADDONS_DIR="$ODOO_BASE_DIR/extraaddons"
 

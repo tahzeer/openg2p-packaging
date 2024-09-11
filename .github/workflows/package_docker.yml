@@ -32,6 +32,7 @@ on:
           - ati-social-registry/1.3
           - ati-social-registry/17.0-develop
           - mowsa-social-registry/1.3.0
+          - edrmc-social-registry/1.3.0
 
 jobs:
   docker-build:

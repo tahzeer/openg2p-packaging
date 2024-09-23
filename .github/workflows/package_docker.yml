@@ -52,7 +52,7 @@ jobs:
             export ODOO_BASE_VERSION=$(sed -n '2p' $package)
             export ODOO_BASE_VERSION=${ODOO_BASE_VERSION#"#!"}
 
-            ./package.sh ${package}
+            ../package.sh ${package}
             docker build . \
               --build-arg BASE_VERSION=${ODOO_BASE_VERSION} \
               --file Dockerfile \

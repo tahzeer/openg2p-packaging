@@ -4,40 +4,10 @@ on:
   workflow_dispatch:
     inputs:
       packageName:
-        description: 'Package Name'
+        description: 'Package path w.r.t packages folder'
         required: true
-        default: 'pbms/17.0-develop'
-        type: choice
-        options:
-          - pbms/*
-          - pbms/15.0-develop
-          - pbms/15.0-develop-pilot001
-          - pbms/15.0-ugc-demo
-          - pbms/15.0-1.1.0
-          - pbms/1.1.0
-          - pbms/17.0-develop-with-social-registry
-          - pbms/17.0-develop
-          - social-registry/*
-          - social-registry/17.0-develop
-          - social-registry/1.2.0
-          - social-registry/1.2.1
-          - social-registry/1.2.2
-          - social-registry/1.2.3
-          - social-registry/1.3.0
-          - social-registry/1.3.1
-          - social-registry/1.2
-          - social-registry/1.3
-          - ati-social-registry/1.3.0
-          - ati-social-registry/1.3.1
-          - ati-social-registry/1.3
-          - ati-social-registry/17.0-develop
-          - mowsa-social-registry/1.3-develop
-          - mowsa-social-registry/1.3.0
-          - mowsa-social-registry/1.3.1
-          - mowsa-social-registry/1.3.2
-          - edrmc-social-registry/1.3.0
-          - drms-social-registry/1.3.0
-
+        default: ''
+        type: string 
 
 jobs:
   docker-build:
@@ -56,16 +26,16 @@ jobs:
 
       - name: Docker build & push
         run: |
-          cd packaging
+          cd packaging/packages
 
           packageNameInput=${{ inputs.packageName }}
 
-          if [ ! -f "packages/${packageNameInput}.txt" ]; then
+          if [ ! -f ${packageNameInput} ]; then
             echo "Could not find the package specified." 1>&2;
             exit 1;
           fi
 
-          for package in packages/${packageNameInput}.txt; do
+          for package in ${packageNameInput}; do
             export IMAGE_ID=$(sed -n '1p' $package)
 
             if [[ $IMAGE_ID == "#!"* ]]; then

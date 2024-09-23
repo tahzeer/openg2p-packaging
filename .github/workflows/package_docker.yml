@@ -35,28 +35,27 @@ jobs:
             exit 1;
           fi
 
-          for package in ${packageNameInput}; do
-            export IMAGE_ID=$(sed -n '1p' $package)
+          package = ${packageNameInput}
+          export IMAGE_ID=$(sed -n '1p' $package)
 
-            if [[ $IMAGE_ID == "#!"* ]]; then
-              export IMAGE_ID=${IMAGE_ID#"#!"}
-            else
-              export DOCKER_TAG=$(basename "${package}" ".txt")
-              if [[ $packageNameInput == pbms* ]]; then
-                export IMAGE_ID=$NAMESPACE/$PBMS_DOCKER_IMAGE_NAME:$DOCKER_TAG
-              elif [[ $packageNameInput == social-registry* ]]; then
-                export IMAGE_ID=$NAMESPACE/$SOCIAL_REGISTRY_DOCKER_IMAGE_NAME:$DOCKER_TAG
-              fi
+          if [[ $IMAGE_ID == "#!"* ]]; then
+            export IMAGE_ID=${IMAGE_ID#"#!"}
+          else
+            export DOCKER_TAG=$(basename "${package}" ".txt")
+            if [[ $packageNameInput == pbms* ]]; then
+              export IMAGE_ID=$NAMESPACE/$PBMS_DOCKER_IMAGE_NAME:$DOCKER_TAG
+            elif [[ $packageNameInput == social-registry* ]]; then
+              export IMAGE_ID=$NAMESPACE/$SOCIAL_REGISTRY_DOCKER_IMAGE_NAME:$DOCKER_TAG
             fi
+          fi
 
-            export ODOO_BASE_VERSION=$(sed -n '2p' $package)
-            export ODOO_BASE_VERSION=${ODOO_BASE_VERSION#"#!"}
+          export ODOO_BASE_VERSION=$(sed -n '2p' $package)
+          export ODOO_BASE_VERSION=${ODOO_BASE_VERSION#"#!"}
 
-            cd ../
-            ./package.sh ${package}
-            docker build . \
-              --build-arg BASE_VERSION=${ODOO_BASE_VERSION} \
-              --file Dockerfile \
-              --tag $IMAGE_ID
-            docker push $IMAGE_ID
-          done
+          cd ../
+          ./package.sh packages/${package}
+          docker build . \
+            --build-arg BASE_VERSION=${ODOO_BASE_VERSION} \
+            --file Dockerfile \
+            --tag $IMAGE_ID
+          docker push $IMAGE_ID

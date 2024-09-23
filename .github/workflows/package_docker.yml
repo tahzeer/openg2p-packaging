@@ -3,7 +3,7 @@ name: OpenG2P Odoo Package Dockers build
 on:
   workflow_dispatch:
     inputs:
-      packageName:
+      packagePath:
         description: 'Package path w.r.t packages folder'
         required: true
         default: ''
@@ -28,27 +28,17 @@ jobs:
         run: |
           cd packaging/packages
 
-          packageNameInput=${{ inputs.packageName }}
+          package=${{ inputs.packagePath }}
 
-          if [ ! -f ${packageNameInput} ]; then
+          if [ ! -f ${package} ]; then
             echo "Could not find the package specified." 1>&2;
             exit 1;
           fi
-
-          package=${packageNameInput}
+          # Pick the Docker name from the first line of the package file
           export IMAGE_ID=$(sed -n '1p' $package)
+          export IMAGE_ID=${IMAGE_ID#"#!"}
 
-          if [[ $IMAGE_ID == "#!"* ]]; then
-            export IMAGE_ID=${IMAGE_ID#"#!"}
-          else
-            export DOCKER_TAG=$(basename "${package}" ".txt")
-            if [[ $packageNameInput == pbms* ]]; then
-              export IMAGE_ID=$NAMESPACE/$PBMS_DOCKER_IMAGE_NAME:$DOCKER_TAG
-            elif [[ $packageNameInput == social-registry* ]]; then
-              export IMAGE_ID=$NAMESPACE/$SOCIAL_REGISTRY_DOCKER_IMAGE_NAME:$DOCKER_TAG
-            fi
-          fi
-
+          # Pick the Odoo version from the second line of the package file
           export ODOO_BASE_VERSION=$(sed -n '2p' $package)
           export ODOO_BASE_VERSION=${ODOO_BASE_VERSION#"#!"}
 

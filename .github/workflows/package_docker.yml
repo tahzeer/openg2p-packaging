@@ -13,9 +13,6 @@ jobs:
   docker-build:
     runs-on: ubuntu-latest
     env:
-      NAMESPACE: ${{ secrets.docker_hub_organisation }}
-      PBMS_DOCKER_IMAGE_NAME: openg2p-pbms-odoo-package
-      SOCIAL_REGISTRY_DOCKER_IMAGE_NAME: openg2p-social-registry-odoo-package
       OPENG2P_BOT_GITHUB_PAT: ${{ secrets.OPENG2P_BOT_GITHUB_PAT }}
     steps:
       - uses: actions/checkout@v2

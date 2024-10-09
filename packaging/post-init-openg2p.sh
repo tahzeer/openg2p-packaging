@@ -1,12 +1,21 @@
 #!/usr/bin/env bash
 
-set -e
+set -o errexit
+set -o nounset
+set -o pipefail
+# set -o xtrace # Uncomment this line for debugging purposes
 
-#ODOO_CONF_FILE=
-#ODOO_ADDONS_DIR=
-#ODOO_VOLUME_DIR=
-#ODOO_DATABASE_NAME=
-EXTRA_ADDONS_PATH="/opt/bitnami/odoo/extraaddons"
+. /opt/bitnami/scripts/odoo-env.sh
+
+if [[ -f /opt/bitnami/scripts/postgresql-client-env.sh ]]; then
+    . /opt/bitnami/scripts/postgresql-client-env.sh
+elif [[ -f /opt/bitnami/scripts/postgresql-env.sh ]]; then
+    . /opt/bitnami/scripts/postgresql-env.sh
+fi
+
+. /opt/bitnami/scripts/libodoo.sh
+
+EXTRA_ADDONS_PATH="$ODOO_BASE_DIR/extraaddons"
 
 for dir in $EXTRA_ADDONS_PATH/*/; do
   ODOO_ADDONS_DIR="$ODOO_ADDONS_DIR,${dir%/}"
@@ -44,47 +53,30 @@ if [ -n "$EXTRA_ADDONS_URLS_TO_PULL" ]; then
   done
 fi
 
-TO_REPLACE=$(grep -i addons_path $ODOO_CONF_FILE)
-sed -i "s#$TO_REPLACE#addons_path = $ODOO_ADDONS_DIR#g" $ODOO_CONF_FILE
+list_db="$(is_boolean_yes "${ODOO_LIST_DB:-no}" && echo 'True' || echo 'False')"
+odoo_debug="$(is_boolean_yes "$BITNAMI_DEBUG" && echo 'True' || echo 'False')"
 
-TO_REPLACE=$(grep -i limit_time_real $ODOO_CONF_FILE)
-sed -i "s/$TO_REPLACE/limit_time_real = $LIMIT_TIME_REAL/g" $ODOO_CONF_FILE
+odoo_conf_set "db_host" "$ODOO_DATABASE_HOST"
+odoo_conf_set "db_name" "$ODOO_DATABASE_NAME"
+odoo_conf_set "db_password" "$ODOO_DATABASE_PASSWORD"
+odoo_conf_set "db_port" "$ODOO_DATABASE_PORT_NUMBER"
+odoo_conf_set "db_user" "$ODOO_DATABASE_USER"
+odoo_conf_set "list_db" "$list_db"
+odoo_conf_set "dbfilter" "$ODOO_DATABASE_FILTER"
+
+odoo_conf_set "debug_mode" "$odoo_debug"
+odoo_conf_set "email_from" "$ODOO_EMAIL"
+
+odoo_conf_set "addons_path" "$ODOO_ADDONS_DIR"
+odoo_conf_set "limit_time_real" "$LIMIT_TIME_REAL"
+odoo_conf_set "log_db" "$LOG_DB"
+odoo_conf_set "log_handler" "$LOG_HANDLER"
+odoo_conf_set "server_wide_modules" "$SERVER_WIDE_MODULES"
 
 if [ -n "$OPENG2P_SMTP_PORT" ] ; then
-  TO_REPLACE=$(grep -i smtp_port $ODOO_CONF_FILE)
-  sed -i "s/$TO_REPLACE/smtp_port = $OPENG2P_SMTP_PORT/g" $ODOO_CONF_FILE
+  odoo_conf_set "smtp_port" "$OPENG2P_SMTP_PORT"
 fi
 
 if [ -n "$OPENG2P_SMTP_HOST" ] ; then
-  TO_REPLACE=$(grep -i smtp_server $ODOO_CONF_FILE)
-  sed -i "s/$TO_REPLACE/smtp_server = $OPENG2P_SMTP_HOST/g" $ODOO_CONF_FILE
-fi
-
-if ! [ "$LIST_DB" = "true" ]; then
-  TO_REPLACE=$(grep -i list_db $ODOO_CONF_FILE)
-  sed -i "s/$TO_REPLACE/list_db = $LIST_DB/g" $ODOO_CONF_FILE
-fi
-
-if ! [ "$LIST_DB" = "true" ]; then
-  TO_REPLACE=$(grep -i dbfilter $ODOO_CONF_FILE)
-  sed -i "s/$TO_REPLACE/dbfilter = $ODOO_DATABASE_NAME/g" $ODOO_CONF_FILE
-fi
-
-if [ -n "$LOG_DB" ]; then
-  TO_REPLACE=$(grep -i log_db $ODOO_CONF_FILE)
-  sed -i "s/$TO_REPLACE/log_db = $LOG_DB/g" $ODOO_CONF_FILE
-fi
-
-if [ -n "$LOG_HANDLER" ]; then
-  TO_REPLACE=$(grep -i log_handler $ODOO_CONF_FILE)
-  sed -i "s/$TO_REPLACE/log_handler = $LOG_HANDLER/g" $ODOO_CONF_FILE
-fi
-
-if [ -n "$SERVER_WIDE_MODULES" ]; then
-  TO_REPLACE=$(grep -i server_wide_modules $ODOO_CONF_FILE)
-  if [ -z "$TO_REPLACE" ]; then
-    echo "server_wide_modules = $SERVER_WIDE_MODULES" >> $ODOO_CONF_FILE
-  else
-    sed -i "s/$TO_REPLACE/server_wide_modules = $SERVER_WIDE_MODULES/g" $ODOO_CONF_FILE
-  fi
+  odoo_conf_set "smtp_server" "$OPENG2P_SMTP_HOST"
 fi

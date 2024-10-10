@@ -43,6 +43,7 @@ jobs:
           ./package.sh packages/${package}
           docker build . \
             --build-arg BASE_VERSION=${ODOO_BASE_VERSION} \
+            --build-arg PACKAGING_REPO_COMMIT_HASH=$(git log -1 --pretty=format:'%H') \
             --file Dockerfile \
             --tag $IMAGE_ID
           docker push $IMAGE_ID

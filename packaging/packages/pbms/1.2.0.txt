@@ -5,5 +5,5 @@
 oca = git://v1.0.0//https://github.com/openg2p/openg2p-pbms-community-addons
 
 # OpenG2P developed modules
-openg2p_registry = git://1.4.0//https://github.com/openg2p/openg2p-registry
-openg2p_program = git://1.2.0//https://github.com/openg2p/openg2p-program
+openg2p_registry = git://v1.4.0//https://github.com/openg2p/openg2p-registry
+openg2p_program = git://v1.2.0//https://github.com/openg2p/openg2p-program

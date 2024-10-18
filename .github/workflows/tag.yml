@@ -28,7 +28,7 @@ jobs:
         fetch-depth: 0
     - name: Check tag convention
       run: |
-        pattern="^v[0-9].[0-9].[0-9]$"
+        pattern="^v[0-9].[0-9].[0-9]+$"
         if ! [[ ${{ inputs.new-tag }} =~ $pattern ]]; then
           echo "Tag convention not followed"
           exit 1

@@ -1,0 +1,9 @@
+#!openg2p/openg2p-pbms-odoo-package:1.2.1
+#!17.0.20240505-debian-12-r0
+
+# OCA dependencies
+oca = git://v1.0.0//https://github.com/openg2p/openg2p-pbms-community-addons
+
+# OpenG2P developed modules
+openg2p_registry = git://v1.4.0//https://github.com/openg2p/openg2p-registry
+openg2p_program = git://v1.2.1//https://github.com/openg2p/openg2p-program

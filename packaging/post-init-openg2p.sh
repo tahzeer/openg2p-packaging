@@ -18,7 +18,7 @@ fi
 EXTRA_ADDONS_PATH="$ODOO_BASE_DIR/extraaddons"
 
 for dir in $EXTRA_ADDONS_PATH/*/; do
-  ODOO_ADDONS_DIR="$ODOO_ADDONS_DIR,${dir%/}"
+  export ODOO_ADDONS_DIR="$ODOO_ADDONS_DIR,${dir%/}"
 done
 
 if [ -n "$EXTRA_ADDONS_URLS_TO_PULL" ]; then

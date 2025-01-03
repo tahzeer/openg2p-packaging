@@ -1,4 +1,4 @@
-#!openg2p/openg2p-social-registry-odoo-package:1.4.3
+#!openg2p/openg2p-social-registry-core:1.4.3
 #!17.0.20240505-debian-12-r0
 
 # OCA dependencies

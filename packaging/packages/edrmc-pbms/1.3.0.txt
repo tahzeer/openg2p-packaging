@@ -2,7 +2,7 @@
 #!17.0.20240505-debian-12-r0
 
 # OCA dependencies
-oca = git://v1.2.3//https://github.com/openg2p/openg2p-pbms-community-addons
+oca = git://v1.0.2//https://github.com/openg2p/openg2p-pbms-community-addons
 
 # OpenG2P developed modules
 openg2p_registry = git://v1.5.1//https://github.com/openg2p/openg2p-registry

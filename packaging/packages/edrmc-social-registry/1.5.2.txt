@@ -1,4 +1,4 @@
-#!openg2p/openg2p-social-registry-ati:1.5.0
+#!openg2p/openg2p-social-registry-edrmc:1.5.2
 #!17.0.20240505-debian-12-r0
 
 # OCA dependencies
@@ -7,4 +7,4 @@ oca = git://v1.2.3//https://github.com/openg2p/openg2p-social-registry-community
 # OpenG2P developed modules
 openg2p_registry = git://v1.5.2//https://github.com/openg2p/openg2p-registry
 openg2p_social_registry = git://v1.5.2//https://github.com/openg2p/openg2p-social-registry
-openg2p_ati = git://v1.5.0//https://${OPENG2P_BOT_GITHUB_PAT}@github.com/openg2p/openg2p-ati
+openg2p_edrmc = git://v1.5.2//https://${OPENG2P_BOT_GITHUB_PAT}@github.com/openg2p/openg2p-edrmc

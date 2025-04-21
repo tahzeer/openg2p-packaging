@@ -1,0 +1,10 @@
+#!openg2p/openg2p-social-registry-edrmc:1.5.3
+#!17.0.20240505-debian-12-r0
+
+# OCA dependencies
+oca = git://v1.2.3//https://github.com/openg2p/openg2p-social-registry-community-addons
+
+# OpenG2P developed modules
+openg2p_registry = git://v1.5.2//https://github.com/openg2p/openg2p-registry
+openg2p_social_registry = git://v1.5.2//https://github.com/openg2p/openg2p-social-registry
+openg2p_edrmc = git://v1.5.3//https://${OPENG2P_BOT_GITHUB_PAT}@github.com/openg2p/openg2p-edrmc

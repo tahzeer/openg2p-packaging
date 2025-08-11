@@ -65,18 +65,9 @@ odoo_conf_set "list_db" "$list_db"
 odoo_conf_set "dbfilter" "$ODOO_DATABASE_FILTER"
 
 odoo_conf_set "debug_mode" "$odoo_debug"
-odoo_conf_set "email_from" "$ODOO_EMAIL"
 
 odoo_conf_set "addons_path" "$ODOO_ADDONS_DIR"
 odoo_conf_set "limit_time_real" "$LIMIT_TIME_REAL"
 odoo_conf_set "log_db" "$LOG_DB"
 odoo_conf_set "log_handler" "$LOG_HANDLER"
 odoo_conf_set "server_wide_modules" "$SERVER_WIDE_MODULES"
-
-if [ -n "$OPENG2P_SMTP_PORT" ] ; then
-  odoo_conf_set "smtp_port" "$OPENG2P_SMTP_PORT"
-fi
-
-if [ -n "$OPENG2P_SMTP_HOST" ] ; then
-  odoo_conf_set "smtp_server" "$OPENG2P_SMTP_HOST"
-fi

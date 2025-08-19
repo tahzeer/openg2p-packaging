@@ -62,7 +62,7 @@ jobs:
             --label org.opencontainers.image.licenses="LGPL-3.0-or-later" \
             --label org.opencontainers.image.title=$(echo $IMAGE_ID | cut -d':' -f1 | cut -d'/' -f2) \
             --label org.opencontainers.image.description="Odoo package created by ${{ github.repository_owner }}." \
-            --label org.opencontainers.image.base.name="docker.io/library/odoo:${ODOO_BASE_VERSION}"
+            --label org.opencontainers.image.base.name="docker.io/library/odoo:${ODOO_BASE_VERSION}" \
             --file Dockerfile \
             --tag $IMAGE_ID
           docker push $IMAGE_ID

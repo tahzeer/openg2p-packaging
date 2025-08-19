@@ -1,16 +1,24 @@
-ARG BASE_VERSION="15.0.20231010-debian-11-r1"
-FROM bitnami/odoo:$BASE_VERSION
+ARG BASE_VERSION="17.0-20250807"
+FROM odoo:$BASE_VERSION
 
-ARG PACKAGING_REPO_COMMIT_HASH=main
-LABEL PACKAGING_REPO_COMMIT_HASH=${PACKAGING_REPO_COMMIT_HASH}
+ARG PACKAGES_TMPDIR=tmpdir
+ARG EXTRA_ADDONS_DIR=/opt/odoo/extraaddons
+ARG MODULES_TO_REMOVE
+ARG MODULES_TO_REMOVE_PATHS=/usr/lib/python3/dist-packages/odoo/addons,${EXTRA_ADDONS_DIR}/*
 
-ENV LIMIT_TIME_REAL=150
-ENV SERVER_WIDE_MODULES=web
+USER root
 
-ADD tmpdir /opt/bitnami/odoo/extraaddons
-ADD docker-build.sh /opt/bitnami/odoo/extraaddons/
-ADD post-init-openg2p.sh /
+RUN ln -s $(which python3) /usr/bin/python
 
-RUN /opt/bitnami/odoo/extraaddons/docker-build.sh
-RUN TO_REPLACE=$(grep "libodoo.sh" /opt/bitnami/scripts/odoo/run.sh); \
-    sed -i "s#$TO_REPLACE#$TO_REPLACE\n/post-init-openg2p.sh#g" /opt/bitnami/scripts/odoo/run.sh
+ADD ${PACKAGES_TMPDIR} ${EXTRA_ADDONS_DIR}
+ADD odoo.conf.tpl /etc/odoo
+
+ADD docker-build.sh /
+ADD docker-build.d /docker-build.d
+RUN /docker-build.sh
+RUN rm -rf /docker-build.sh /docker-build.d
+
+ADD docker-entrypoint.sh /entrypoint.sh
+ADD docker-entrypoint.d /docker-entrypoint.d
+
+USER odoo

@@ -13,9 +13,8 @@ reponame_list=$1
 root_dir=`pwd`
 # Read each line (filename) from the file
 while IFS= read -r filename; do
-  cd ${root_dir}/${filename} 
+  cd ${root_dir}/${filename}
   git tag $2 $3
   git push origin $2
   echo "Tagged: ${filename}"
 done < "$reponame_list"
-

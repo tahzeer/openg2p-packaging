@@ -13,10 +13,9 @@ reponame_list=$1
 root_dir=`pwd`
 # Read each line (filename) from the file
 while IFS= read -r filename; do
-  cd ${root_dir}/${filename} 
-  #git add . 
+  cd ${root_dir}/${filename}
+  #git add .
   #git commit -m "Version updated"
-  git push origin $2 
+  git push origin $2
   echo "Committed: ${filename}"
 done < "$reponame_list"
-

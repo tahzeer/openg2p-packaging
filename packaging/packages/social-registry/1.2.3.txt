@@ -15,4 +15,3 @@ openg2p_security = git://v1.2.2//https://github.com/openg2p/openg2p-security
 openg2p_vci = git://v1.2.2//https://github.com/openg2p/openg2p-vci
 openg2p_registration_portal = git://v1.2.2//https://github.com/openg2p/openg2p-registration-portal
 openg2p_service_provider_portal = git://v1.2.2//https://github.com/openg2p/openg2p-service-provider-portal
-

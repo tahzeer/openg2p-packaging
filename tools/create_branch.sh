@@ -13,10 +13,9 @@ reponame_list=$1
 root_dir=`pwd`
 # Read each line (filename) from the file
 while IFS= read -r filename; do
-  cd ${root_dir}/${filename} 
-  git checkout -b $2 
-  git push origin $2 
-  
+  cd ${root_dir}/${filename}
+  git checkout -b $2
+  git push origin $2
+
   echo "Branched: ${filename}"
 done < "$reponame_list"
-

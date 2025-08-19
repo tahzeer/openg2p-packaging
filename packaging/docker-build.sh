@@ -1,23 +1,14 @@
 #!/usr/bin/env bash
+
 # Donot run this on local,
 # this is supposed to be run inside docker
 
 set -e
+set -o pipefail
 
-ODOO_BASE_DIR="/opt/bitnami/odoo"
-EXTRA_ADDONS_DIR="$ODOO_BASE_DIR/extraaddons"
-
-apt-get update
-apt-get install -y build-essential autoconf libtool
-apt-get install -y libjpeg-dev zlib1g-dev
-source $ODOO_BASE_DIR/venv/bin/activate
-for dir in $EXTRA_ADDONS_DIR/*/; do
-    if [[ -f ${dir}requirements.txt ]]; then
-        pip3 install -r $dir/requirements.txt
-    fi
-done
-deactivate
-apt-get purge -y build-essential autoconf libtool
-apt-get autoremove -y
-apt-get clean
-rm -rf /var/lib/apt/lists /var/cache/apt/archives
+if [ -e "/docker-build.d" ] && ls -d /docker-build.d/*.sh 1> /dev/null 2>&1; then
+  for ent_file in /docker-build.d/*.sh; do
+    echo Executing $ent_file
+    . $ent_file
+  done
+fi

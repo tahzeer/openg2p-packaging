@@ -20,10 +20,9 @@ prefix=https://github.com/openg2p/
 while IFS= read -r filename; do
   # Add the prefix to the filename
   new_filename="${prefix}${filename}"
-  
+
   # Create the file (or update its timestamp) using touch
   git clone -b "$branch" "$new_filename"
-  
+
   echo "Cloned: $new_filename"
 done < "$filename_list"
-

@@ -1,5 +1,6 @@
 #!openg2p/openg2p-social-registry-odoo-package:17.0-develop
-#!17.0.20240505-debian-12-r0
+#!17.0-20250807
+#!(^attachment_indexation$)|(^auth_ldap$)|(^auth_totp$)|(^barcodes.*$)|(^board$)|(^calendar.*$)|(^crm.*$)|(^data_recycle$)|(^delivery.*$)|(^event.*$)|(^fleet$)|(^gamification.*$)|(^google.*$)|(^hr.*$)|(^hw_drivers$)|(^hw_escpos$)|(^hw_posbox_homepage$)|(^iap.*$)|(^im_livechat$)|(^l10n_.*$)|(^link_tracker$)|(^loyalty$)|(^lunch$)|(^maintenance$)|(^membership$)|(^microsoft_.*$)|(^mrp.*$)|(^partner_autocomplete$)|(^payment.*$)|(^phone_validation$)|(^point_of_sale$)|(^pos.*$)|(^privacy_lookup$)|(^project.*$)|(^purchase.*$)|(^rating$)|(^repair$)|(^sale.*$)|(^sales_team$)|(^sms$)|(^social_media$)|(^spreadsheet.*$)|(^stock.*$)|(^survey$)|(^test.*$)|(^theme_default$)|(^transifex$)|(^utm$)
 
 # OCA dependencies
 oca = git://17.0-develop//https://github.com/openg2p/openg2p-social-registry-community-addons

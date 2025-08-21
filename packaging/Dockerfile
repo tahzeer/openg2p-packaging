@@ -18,7 +18,7 @@ ADD docker-build.d /docker-build.d
 RUN /docker-build.sh
 RUN rm -rf /docker-build.sh /docker-build.d
 
-ADD docker-entrypoint.sh /entrypoint.sh
+ADD docker-entrypoint.sh /docker-entrypoint.sh
 ADD docker-entrypoint.d /docker-entrypoint.d
 
 USER odoo

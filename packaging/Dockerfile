@@ -20,5 +20,6 @@ RUN rm -rf /docker-build.sh /docker-build.d
 
 ADD docker-entrypoint.sh /entrypoint.sh
 ADD docker-entrypoint.d /docker-entrypoint.d
+RUN chmod -R +x /docker-entrypoint.d /entrypoint.sh
 
 USER odoo

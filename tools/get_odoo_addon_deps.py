@@ -97,7 +97,7 @@ def get_all_odoo_dependencies(custom_addons_dir: str, module_manifest_map: dict[
         if path:
             # We store the directory path, not the manifest file path
             final_dependencies[dep] = os.path.dirname(path)
-    
+
     return final_dependencies
 
 def main():
@@ -110,13 +110,13 @@ def main():
 
     custom_addons_dir = sys.argv[1]
     other_addons_dirs = sys.argv[2:]
-    
+
     # Make a single list of all addon directories for mapping
     all_addons_dirs = [custom_addons_dir] + other_addons_dirs
 
     # Build the module map from all directories
     module_manifest_map = _build_module_map(all_addons_dirs)
-    
+
     # Get the dependencies starting from the custom addons directory
     all_dependencies = get_all_odoo_dependencies(custom_addons_dir, module_manifest_map)
 

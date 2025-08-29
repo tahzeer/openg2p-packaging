@@ -22,12 +22,6 @@ db_sslmode = ${ODOO_DATABASE_SSLMODE}
 db_template = ${ODOO_DATABASE_TEMPLATE}
 dbfilter = ${ODOO_DATABASE_FILTER_OVERRIDE}
 
-smtp_server = ${ODOO_SMTP_HOST}
-smtp_port = ${ODOO_SMTP_PORT_NUMBER}
-smtp_user = ${ODOO_SMTP_USER}
-smtp_password = ${ODOO_SMTP_PASSWORD}
-smtp_ssl = ${ODOO_SMTP_SSL}
-
 debug_mode = ${ODOO_DEBUG_MODE}
 list_db = ${ODOO_LIST_DB}
 

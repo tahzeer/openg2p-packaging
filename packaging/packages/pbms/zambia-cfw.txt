@@ -6,5 +6,5 @@ oca = git://v1.0.4//https://github.com/openg2p/openg2p-pbms-community-addons
 
 # OpenG2P developed modules
 openg2p_registry = git://v1.5.6//https://github.com/openg2p/openg2p-registry
-openg2p_pbms = git://temp-zambia-cfw//https://github.com/openg2p/openg2p-pbms-gen2-odoo
+openg2p_pbms = git://temp-zambia-cfw//https://github.com/tahzeer/openg2p-pbms-gen2-odoo
 openg2p_pbms_addons = git://zambia-cfw//https://github.com/tahzeer/openg2p-pbms-gen2-odoo-registry-addons
